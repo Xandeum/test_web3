@@ -7,7 +7,7 @@ type ResultValue = {
   data?: any; 
 };
 
-export function subscribeToBigBangResult(
+export function subscribeResult(
   tx: string,
   wsUrl: string,
   onResult: (value: ResultValue) => void,

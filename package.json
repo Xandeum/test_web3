@@ -1,6 +1,6 @@
 {
   "name": "test2-xandeum-web3",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -11,7 +11,9 @@
   "description": "",
   "dependencies": {
     "@solana/web3.js": "^1.98.2",
-    "bn.js": "^5.2.2",
     "ws": "^8.18.2"
+  },
+  "devDependencies": {
+    "@types/bn.js": "^5.1.6"
   }
 }
