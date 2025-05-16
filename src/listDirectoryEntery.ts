@@ -16,7 +16,7 @@ export interface RpcRequest {
     const requestBody: RpcRequest = {
       jsonrpc: '2.0',
       id: 1,
-      method: 'listDirectoryEntry',
+      method: 'listDirs',
       params: [path],
     };
   
