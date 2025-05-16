@@ -36,7 +36,7 @@ export function subscribeResult(
       onResult({
         fsid: value.fsid,
         status: value.status,
-        data: value.data,
+        data: value.message,
       });
     }
   });

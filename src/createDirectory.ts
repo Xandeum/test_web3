@@ -28,7 +28,7 @@ import BN from "bn.js";
       throw new Error("Invalid path: Only letters, numbers, and '/' are allowed.");
     }
   
-    // Validate name: only letters and numbers
+    // Validate name: only letters and numbers //TODO update this to allow special characters
     if (!/^[a-zA-Z0-9]+$/.test(name)) {
       throw new Error("Invalid name: Only letters and numbers are allowed.");
     }
