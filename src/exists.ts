@@ -12,7 +12,7 @@ export interface RpcRequest {
    * @param path The metadata path (e.g., account or key)
    * @param url The Xandeum RPC URL
    */
-  export async function exists(path: string,url:string): Promise<any> {
+  export async function exists(path: string): Promise<any> {
     const requestBody: RpcRequest = {
       jsonrpc: '2.0',
       id: 1,
@@ -20,7 +20,7 @@ export interface RpcRequest {
       params: [path],
     };
   
-    const response = await fetch(url, {
+    const response = await fetch("http://8.52.151.4::8899", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
