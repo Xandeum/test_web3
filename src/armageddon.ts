@@ -6,7 +6,9 @@ import {
     PublicKey,
   } from "@solana/web3.js";
 import BN from "bn.js";
+import { programId } from "./const.js";
   
+
   /**
    * Creates a Solana transaction with a basic instruction.
    * @param programId - The program's public key.
@@ -14,7 +16,7 @@ import BN from "bn.js";
    * @param wallet - The wallet that signs the transaction.
    * @returns A Solana Transaction object.
    */
-  export async function armageddon(programId: PublicKey, fsid:string,wallet: PublicKey): Promise<Transaction> {
+  export async function armageddon(fsid:string,wallet: PublicKey): Promise<Transaction> {
     const instructionData = Buffer.concat([
       Buffer.from(Int8Array.from([1]).buffer),
       Buffer.from(Uint8Array.of(...new BN(fsid).toArray("le", 8))),
@@ -29,7 +31,7 @@ import BN from "bn.js";
           isWritable: true,
         },
       ],
-      programId,
+      programId:new PublicKey(programId),
       data: instructionData,
     });
   

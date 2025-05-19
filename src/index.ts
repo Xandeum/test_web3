@@ -12,5 +12,4 @@ export * from "./copyPath";
 
 export {exists } from "./exists";
 export {listDirectoryEntry} from "./listDirectoryEntery";
-export {getInfo} from "./getInfo";
 export {getMetadata} from "./getMetadata";

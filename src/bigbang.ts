@@ -4,6 +4,7 @@ import {
   TransactionInstruction,
   PublicKey,
 } from "@solana/web3.js";
+import { programId } from "./const";
 
 /**
  * Creates a Solana transaction with a basic instruction.
@@ -11,7 +12,7 @@ import {
  * @param wallet - The wallet that signs the transaction.
  * @returns A Solana Transaction object.
  */
-export async function bigbang(programId: PublicKey, wallet: PublicKey): Promise<Transaction> {
+export async function bigbang(wallet: PublicKey): Promise<Transaction> {
   const instructionData = Buffer.concat([
     Buffer.from(Int8Array.from([0]).buffer),
   ]);
@@ -24,7 +25,7 @@ export async function bigbang(programId: PublicKey, wallet: PublicKey): Promise<
         isWritable: true,
       },
     ],
-    programId,
+    programId:new PublicKey(programId),
     data: instructionData,
   });
 

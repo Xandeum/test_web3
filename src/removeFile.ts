@@ -6,6 +6,7 @@ import {
     PublicKey,
   } from "@solana/web3.js";
 import BN from "bn.js";
+import { programId } from "./const";
   
   /**
    * Creates a Solana transaction with a basic instruction.
@@ -16,7 +17,6 @@ import BN from "bn.js";
    * @returns A Solana Transaction object.
    */
   export async function removeFile(
-    programId: PublicKey,
     fsid: string,
     path: string,
     wallet: PublicKey
@@ -40,7 +40,7 @@ import BN from "bn.js";
           isWritable: true,
         },
       ],
-      programId,
+      programId:new PublicKey(programId),
       data: instructionData,
     });
   

@@ -6,6 +6,7 @@ import {
     PublicKey,
   } from "@solana/web3.js";
 import BN from "bn.js";
+import { programId } from "./const";
   
   /**
    * Creates a Solana transaction with a basic instruction.
@@ -18,7 +19,6 @@ import BN from "bn.js";
    * @returns A Solana Transaction object.
    */
   export async function poke(
-    programId: PublicKey,
     fsid: string,
     path: string,
     position: number,
@@ -51,7 +51,7 @@ import BN from "bn.js";
             isWritable: false,
           })),
       ],
-      programId,
+      programId:new PublicKey(programId),
       data: instructionData,
     });
   
