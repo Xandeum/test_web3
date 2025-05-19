@@ -1,0 +1,27 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "entryPoints": ["src/index.ts"],
+    "plugin": ["typedoc-plugin-markdown"],
+    "out": "docs/markdown",
+    "tsconfig": "tsconfig.json",
+    "name": "Xandeum Web3 Library",
+    "readme": "README.md",
+    "theme": "default",
+    "includeVersion": true,
+    "hideGenerator": false,
+    "githubPages": true,
+    "cleanOutputDir": true,
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "excludeInternal": true,
+    "excludeNotDocumented": false,
+    "gitRemote": "origin",
+    "gitRevision": "main",
+    "sourceLinkTemplate": "https://github.com/Xandeum/test_web3/blob/{gitRevision}/{path}#L{line}",
+    "visibilityFilters": {
+      "protected": false,
+      "private": false,
+      "inherited": true,
+      "external": true
+    }
+  }
