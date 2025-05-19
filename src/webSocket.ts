@@ -18,7 +18,7 @@ type ResultValue = {
 export function subscribeResult (
   tx: string,
   wsUrl: string,
-  onResult: (value: ResultValue) => void,
+  onResult: (value: any) => void,
   onError?: (err: any) => void,
   onClose?: () => void
 ): void {
@@ -36,15 +36,9 @@ export function subscribeResult (
 
   ws.addEventListener('message', event => {
     const d = JSON.parse(String(event.data).replace(/:\s*(\d{16,})/g, ': "$1"'))
-
+    console.log('Received message:', d)
     const value = d?.params?.result?.value
-    if (value?.fsid || value?.status || value?.data) {
-      onResult({
-        fsid: value.fsid,
-        status: value.status,
-        data: value.message
-      })
-    }
+      onResult(value)
   })
 
   ws.addEventListener('error', error => {
