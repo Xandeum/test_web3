@@ -77,7 +77,18 @@ export function unsubscribeResult (subscriptionId: string, wsUrl: string): void 
     console.log(
       `Sent xandeumResultUnsubscribe for subscription ID: ${subscriptionId}`
     )
-
+    ws.addEventListener('message', (event) => {
+        try {
+          const data = JSON.parse(event.data.toString());
+          if (data.id === 2 && data.result === true) {
+            console.log("✅ Unsubscribed successfully.");
+            // if (onUnsubscribed) onUnsubscribed();
+            ws.close(); // Optional: close the WebSocket
+          }
+        } catch (err) {
+          console.error("Failed to parse message during unsubscribe:", err);
+        }
+      });
     // Optionally close the WebSocket after sending
     ws.close()
   })
