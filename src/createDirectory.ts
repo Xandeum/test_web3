@@ -1,58 +1,52 @@
+import { Transaction, TransactionInstruction, PublicKey } from '@solana/web3.js'
+import BN from 'bn.js'
+import { programId } from './const'
+import { sanitizePath } from './sanitizePath'
 
+/**
+ * Constructs a Solana transaction to create a new directory within a  file system.
+ *
+ * The function builds the transaction instruction with:
+ * - Instruction byte `6`
+ * - FSID encoded as 8-byte little-endian
+ * - UTF-8 encoded `path\0name` payload
+ *
+ * @param fsid - A numeric filesystem identifier used to scope the directory creation.
+ * @param path - The parent path where the directory should be created (e.g., `/documents`).
+ * @param name - The name of the new directory (e.g., `reports`).
+ * @param wallet - The signer’s public key that authorizes the transaction.
+ * @returns A Promise that resolves to a Solana `Transaction` object containing the createDirectory instruction.
+ * @throws Will throw an error if `path` or `name` contains invalid characters.@throws Will throw if the combined path is invalid (non-alphanumeric or unsupported characters).
+ */
 
-import {
-    Transaction,
-    TransactionInstruction,
-    PublicKey,
-  } from "@solana/web3.js";
-import BN from "bn.js";
-import { programId } from "./const";
-  
-  /**
-   * Creates a Solana transaction with a basic instruction.
-   * @param programId - The program's public key.
-   * @param fsid - The fsid that will armageddon.
-   * @param path - The path where you want to create directory.
-   * @param name - The name of the directory.
-   * @param wallet - The wallet that signs the transaction.
-   * @returns A Solana Transaction object.
-   */
-  export async function createDirectory(
-    fsid: string,
-    path: string,
-    name: string,
-    wallet: PublicKey
-  ): Promise<Transaction> {
-    // Validate path: only letters, numbers, and /
-    if (!/^[a-zA-Z0-9/]*$/.test(path)) {
-      throw new Error("Invalid path: Only letters, numbers, and '/' are allowed.");
-    }
-  
-    // Validate name: only letters and numbers //TODO update this to allow special characters
-    if (!/^[a-zA-Z0-9]+$/.test(name)) {
-      throw new Error("Invalid name: Only letters and numbers are allowed.");
-    }
-    const rest = Buffer.from(`${path}\0${name}`, "utf-8");
-    const instructionData = Buffer.concat([
-      Buffer.from(Int8Array.from([6]).buffer),
-      Buffer.from(Uint8Array.of(...new BN(fsid).toArray("le", 8))),
-      rest,
-    ]);
-  
-    const instruction = new TransactionInstruction({
-      keys: [
-        {
-          pubkey: wallet,
-          isSigner: true,
-          isWritable: true,
-        },
-      ],
-      programId:new PublicKey(programId),
-      data: instructionData,
-    });
-  
-    const tx = new Transaction().add(instruction);
-    return tx;
-  }
-  
-  
+export async function createDirectory (
+  fsid: string,
+  path: string,
+  name: string,
+  wallet: PublicKey
+): Promise<Transaction> {
+  // Validate path: only letters, numbers, and /
+  let combinedPath = path + '/' + name
+  sanitizePath(combinedPath)
+  const rest = Buffer.from(`${path}\0${name}`, 'utf-8')
+  const instructionData = Buffer.concat([
+    Buffer.from(Int8Array.from([6]).buffer),
+    Buffer.from(Uint8Array.of(...new BN(fsid).toArray('le', 8))),
+    rest
+  ])
+
+  const instruction = new TransactionInstruction({
+    keys: [
+      {
+        pubkey: wallet,
+        isSigner: true,
+        isWritable: true
+      }
+    ],
+    programId: new PublicKey(programId),
+    data: instructionData
+  })
+
+  const tx = new Transaction().add(instruction)
+  return tx
+}

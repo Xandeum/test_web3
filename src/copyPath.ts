@@ -1,58 +1,56 @@
+import { Transaction, TransactionInstruction, PublicKey } from '@solana/web3.js'
+import BN from 'bn.js'
+import { programId } from './const'
+import { sanitizePath } from './sanitizePath'
 
+/**
+ * Constructs a Solana transaction to copy a file or directory from one  path to another.
+ *
+ * The payload includes:
+ * - Opcode `9` (1 byte)
+ * - Filesystem ID (`fsid`) encoded as 8 bytes little-endian
+ * - UTF-8 encoded `srcPath\0destPath`
+ *
+ * @param fsid - The unique numeric identifier representing the target file system.
+ * @param srcPath - The source path to copy from (e.g., `/documents/report.txt`).
+ * @param destPath - The destination path to copy to (e.g., `/archive/report.txt`).
+ * @param wallet - The wallet public key used to sign and authorize the transaction.
+ * @returns A Promise that resolves to a Solana `Transaction` object containing the copyPath instruction.
+ * @throws Will throw an error if `srcPath` or `destPath` contains invalid characters.
+ *
+ */
 
-import {
-    Transaction,
-    TransactionInstruction,
-    PublicKey,
-  } from "@solana/web3.js";
-import BN from "bn.js";
-import { programId } from "./const";
-  
-  /**
-   * Creates a Solana transaction with a basic instruction.
-   * @param programId - The program's public key.
-   * @param fsid - The fsid that will armageddon.
-   * @param srcPath - Source path.
-   * @param destPath - Destination path.
-   * @param wallet - The wallet that signs the transaction.
-   * @returns A Solana Transaction object.
-   */
-  export async function copyPath(
-    fsid: string,
-    srcPath: string,
-    destPath: string,
-    wallet: PublicKey
-  ): Promise<Transaction> {
-    // Validate path: only letters, numbers, and /
-    if (!/^[a-zA-Z0-9/]*$/.test(srcPath)) {
-      throw new Error("Invalid srcPath: Only letters, numbers, and '/' are allowed.");
-    }
-    if (!/^[a-zA-Z0-9/]*$/.test(destPath)) {
-        throw new Error("Invalid destPath: Only letters, numbers, and '/' are allowed.");
-    }
-      
-    const rest = Buffer.from(`${srcPath}\0${destPath}`, "utf-8");
-  
-    const instructionData = Buffer.concat([
-      Buffer.from(Int8Array.from([9]).buffer),
-      Buffer.from(Uint8Array.of(...new BN(fsid).toArray("le", 8))),
-      rest,
-    ]);
-  
-    const instruction = new TransactionInstruction({
-      keys: [
-        {
-          pubkey: wallet,
-          isSigner: true,
-          isWritable: true,
-        },
-      ],
-      programId:new PublicKey(programId),
-      data: instructionData,
-    });
-  
-    const tx = new Transaction().add(instruction);
-    return tx;
-  }
-  
-  
+export async function copyPath (
+  fsid: string,
+  srcPath: string,
+  destPath: string,
+  wallet: PublicKey
+): Promise<Transaction> {
+  // Validate path: only letters, numbers, and /
+  sanitizePath(srcPath)
+
+  sanitizePath(destPath)
+
+  const rest = Buffer.from(`${srcPath}\0${destPath}`, 'utf-8')
+
+  const instructionData = Buffer.concat([
+    Buffer.from(Int8Array.from([9]).buffer),
+    Buffer.from(Uint8Array.of(...new BN(fsid).toArray('le', 8))),
+    rest
+  ])
+
+  const instruction = new TransactionInstruction({
+    keys: [
+      {
+        pubkey: wallet,
+        isSigner: true,
+        isWritable: true
+      }
+    ],
+    programId: new PublicKey(programId),
+    data: instructionData
+  })
+
+  const tx = new Transaction().add(instruction)
+  return tx
+}

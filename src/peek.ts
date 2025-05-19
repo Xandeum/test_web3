@@ -1,58 +1,59 @@
+import { Transaction, TransactionInstruction, PublicKey } from '@solana/web3.js'
+import BN from 'bn.js'
+import { programId } from './const'
+import { sanitizePath } from './sanitizePath'
 
+/**
+ * Constructs a Solana transaction to perform a "peek" operation on a file within a file system.
+ *
+ * The peek operation reads data between two byte offsets within a specified file path.
+ *
+ * This transaction includes:
+ * - A discriminator byte `3` to identify the "peek" instruction.
+ * - The `fsid` encoded as a 64-bit little-endian unsigned integer.
+ * - The start and end positions (both 64-bit little-endian integers) representing the byte range to read.
+ * - The file path as a UTF-8 encoded buffer.
+ * - The wallet public key as a writable and signing account.
+ *
+ * @param fsid - A stringified integer representing the file system ID in which the file resides.
+ * @param path - The path to the file to be peeked.
+ * @param startPosition - The starting byte offset (inclusive) to begin reading from.
+ * @param endPosition - The ending byte offset (exclusive) to stop reading at.
+ * @param wallet - The public key of the wallet that will sign and authorize the transaction.
+ * @returns A Promise that resolves to a Solana `Transaction` object containing the peek instruction.
+ * @throws Will throw an error if the `path` contains invalid characters.
+ */
 
-import {
-    Transaction,
-    TransactionInstruction,
-    PublicKey,
-  } from "@solana/web3.js";
-import BN from "bn.js";
-import { programId } from "./const";
-  
-  /**
-   * Creates a Solana transaction with a basic instruction.
-   * @param programId - The program's public key.
-   * @param fsid - The fsid that will armageddon.
-   * @param path - The file path where you want to poke.
-   * @param startPositionposition - The start position in the file where you want to peek.
-   * @endPosition - The end position in the file where you want to peek.
-   * @param wallet - The wallet that signs the transaction.
-   * @returns A Solana Transaction object.
-   */
-  export async function peek(
-    fsid: string,
-    path: string,
-    startPosition: number,
-    endPosition: number,
-    wallet: PublicKey,
-  ): Promise<Transaction> {
-    // Validate path: only letters, numbers, and /
-    if (!/^[a-zA-Z0-9/]*$/.test(path)) {
-      throw new Error("Invalid path: Only letters, numbers, and '/' are allowed.");
-    }
-  
-    const rest = Buffer.from(`${path}`, "utf-8");
-    const instructionData = Buffer.concat([
-      Buffer.from(Int8Array.from([3]).buffer),
-      Buffer.from(Uint8Array.of(...new BN(fsid).toArray("le", 8))),
-      Buffer.from(Uint8Array.of(...new BN(startPosition).toArray("le", 8))),
-      Buffer.from(Uint8Array.of(...new BN(endPosition).toArray("le", 8))),
-      rest,
-    ]);
-  
-    const instruction = new TransactionInstruction({
-      keys: [
-        {
-          pubkey: wallet,
-          isSigner: true,
-          isWritable: true,
-        }
-      ],
-      programId:new PublicKey(programId),
-      data: instructionData,
-    });
-  
-    const tx = new Transaction().add(instruction);
-    return tx;
-  }
-  
-  
+export async function peek (
+  fsid: string,
+  path: string,
+  startPosition: number,
+  endPosition: number,
+  wallet: PublicKey
+): Promise<Transaction> {
+  sanitizePath(path)
+
+  const rest = Buffer.from(`${path}`, 'utf-8')
+  const instructionData = Buffer.concat([
+    Buffer.from(Int8Array.from([3]).buffer),
+    Buffer.from(Uint8Array.of(...new BN(fsid).toArray('le', 8))),
+    Buffer.from(Uint8Array.of(...new BN(startPosition).toArray('le', 8))),
+    Buffer.from(Uint8Array.of(...new BN(endPosition).toArray('le', 8))),
+    rest
+  ])
+
+  const instruction = new TransactionInstruction({
+    keys: [
+      {
+        pubkey: wallet,
+        isSigner: true,
+        isWritable: true
+      }
+    ],
+    programId: new PublicKey(programId),
+    data: instructionData
+  })
+
+  const tx = new Transaction().add(instruction)
+  return tx
+}

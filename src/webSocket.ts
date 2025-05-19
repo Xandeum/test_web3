@@ -1,4 +1,3 @@
-// src/websocket.ts
 import WebSocket from 'ws'
 
 type ResultValue = {
@@ -9,13 +8,26 @@ type ResultValue = {
 }
 
 /**
- * Subscribes to the result of a transaction using WebSocket.
- * @param tx The transaction ID to subscribe to.
- * @param wsUrl The WebSocket URL to connect to.
- * @param onResult Callback function to handle the result.
- * @param onError Optional callback function to handle errors.
- * @param onClose Optional callback function to handle WebSocket closure.
+ * Opens a WebSocket connection and subscribes to the result of a transaction
+ * via the custom `xandeumResultSubscribe` method.
+ *
+ * This is useful for receiving asynchronous results tied to an on-chain operation,
+ * such as file creation, modification, or deletion.
+ *
+ * The subscription sends a JSON-RPC request with:
+ * - `method`: "xandeumResultSubscribe"
+ * - `params`: [txId, { commitment: "finalized" }]
+ *
+ * The WebSocket listens for result messages and invokes the `onResult` callback
+ * if a valid result with `fsid`, `status`, or `data` is received.
+ *
+ * @param tx - The transaction ID you want to listen for results from.
+ * @param wsUrl - The full WebSocket endpoint (e.g., `wss://...`) to connect to.
+ * @param onResult - Callback to handle incoming result messages. Triggered when a valid response is received.
+ * @param onError - (Optional) Callback triggered if a WebSocket error occurs.
+ * @param onClose - (Optional) Callback triggered when the WebSocket connection closes.
  */
+
 export function subscribeResult (
   tx: string,
   wsUrl: string,
@@ -39,7 +51,10 @@ export function subscribeResult (
     const d = JSON.parse(String(event.data).replace(/:\s*(\d{16,})/g, ': "$1"'))
 
     const value = d?.params?.result?.value
-    if (value?.fsid || value?.status || value?.data || d?.params?.subscription) {
+    if (
+      (value?.fsid || value?.status || value?.data) &&
+      d?.params?.subscription
+    ) {
       onResult({
         fsid: value.fsid,
         status: value.status,
@@ -59,10 +74,15 @@ export function subscribeResult (
 }
 
 /**
- * Unsubscribes from the result of a transaction using the given subscription ID.
- * @param subscriptionId The ID of the subscription to unsubscribe from.
- * @param wsUrl The WebSocket URL to connect to.
+ * Sends a WebSocket JSON-RPC message to unsubscribe from a previously subscribed transaction result
+ * using the `xandeumResultUnsubscribed` method (note: custom method, ensure server-side implementation matches).
+ *
+ * This function automatically closes the WebSocket connection after sending the unsubscribe request.
+ *
+ * @param subscriptionId - The ID of the active subscription you want to cancel.
+ * @param wsUrl - The WebSocket endpoint (e.g., `wss://...`) to connect to for unsubscribing.
  */
+
 export function unsubscribeResult (subscriptionId: string, wsUrl: string): void {
   const ws = new WebSocket(wsUrl)
   ws.addEventListener('open', () => {
@@ -77,19 +97,6 @@ export function unsubscribeResult (subscriptionId: string, wsUrl: string): void 
     console.log(
       `Sent xandeumResultUnsubscribe for subscription ID: ${subscriptionId}`
     )
-    ws.addEventListener('message', (event) => {
-        try {
-          const data = JSON.parse(event.data.toString());
-          if (data.id === 2 && data.result === true) {
-            console.log("✅ Unsubscribed successfully.");
-            // if (onUnsubscribed) onUnsubscribed();
-            ws.close(); // Optional: close the WebSocket
-          }
-        } catch (err) {
-          console.error("Failed to parse message during unsubscribe:", err);
-        }
-      });
-    // Optionally close the WebSocket after sending
     ws.close()
   })
 
