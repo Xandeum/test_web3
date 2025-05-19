@@ -69,7 +69,7 @@ export function unsubscribeResult (subscriptionId: string, wsUrl: string): void 
     const unsubscribeMessage = {
       jsonrpc: '2.0',
       id: 2,
-      method: 'xandeumResultUnsubscribe', // ✅ fixed typo
+      method: 'xandeumResultUnscribe', // ✅ fixed typo
       params: [subscriptionId]
     }
 
