@@ -32,12 +32,16 @@ export async function poke (
 ): Promise<Transaction> {
   sanitizePath(path)
 
-  const rest = Buffer.from(`${path}`, 'utf-8')
+  // Encode the path as UTF-8
+  const pathBuffer = Buffer.from(path, 'utf-8')
+  // Encode the path length as an 8-byte little-endian unsigned integer
+  const pathLengthBuffer = Buffer.from(Uint8Array.of(...new BN(pathBuffer.length).toArray('le', 8)))
   const instructionData = Buffer.concat([
     Buffer.from(Int8Array.from([4]).buffer),
     Buffer.from(Uint8Array.of(...new BN(fsid).toArray('le', 8))),
     Buffer.from(Uint8Array.of(...new BN(position).toArray('le', 8))),
-    rest
+    pathLengthBuffer,
+    pathBuffer
   ])
 
   const instruction = new TransactionInstruction({
