@@ -1,4 +1,4 @@
-[**Xandeum Web3 Library v9.0.0**](../README.md)
+[**Xandeum Web3 Library v9.2.0**](../README.md)
 
 ***
 
@@ -8,16 +8,10 @@
 
 > **createFile**(`fsid`, `path`, `name`, `wallet`): `Promise`\<`Transaction`\>
 
-Defined in: [createFile.ts:23](https://github.com/Xandeum/test_web3/blob/main/src/createFile.ts#L23)
+Defined in: [createFile.ts:17](https://github.com/Xandeum/test_web3/blob/main/src/createFile.ts#L17)
 
 Constructs a Solana transaction to create a new file
 within a file system, identified by a file system ID (`fsid`).
-
-This transaction includes:
-- A discriminator byte `2` to identify the "create file" operation.
-- The `fsid` encoded as a 64-bit little-endian unsigned integer.
-- A UTF-8 encoded payload combining the `path` and `name`, separated by a null terminator.
-- The wallet public key as a signer and writable account.
 
 ## Parameters
 

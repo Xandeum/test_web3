@@ -1,4 +1,4 @@
-[**Xandeum Web3 Library v9.0.0**](../README.md)
+[**Xandeum Web3 Library v9.2.0**](../README.md)
 
 ***
 
@@ -8,18 +8,11 @@
 
 > **peek**(`fsid`, `path`, `startPosition`, `endPosition`, `wallet`): `Promise`\<`Transaction`\>
 
-Defined in: [peek.ts:27](https://github.com/Xandeum/test_web3/blob/main/src/peek.ts#L27)
+Defined in: [peek.ts:20](https://github.com/Xandeum/test_web3/blob/main/src/peek.ts#L20)
 
 Constructs a Solana transaction to perform a "peek" operation on a file within a file system.
 
 The peek operation reads data between two byte offsets within a specified file path.
-
-This transaction includes:
-- A discriminator byte `3` to identify the "peek" instruction.
-- The `fsid` encoded as a 64-bit little-endian unsigned integer.
-- The start and end positions (both 64-bit little-endian integers) representing the byte range to read.
-- The file path as a UTF-8 encoded buffer.
-- The wallet public key as a writable and signing account.
 
 ## Parameters
 
