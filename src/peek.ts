@@ -8,13 +8,6 @@ import { sanitizePath } from './sanitizePath'
  *
  * The peek operation reads data between two byte offsets within a specified file path.
  *
- * This transaction includes:
- * - A discriminator byte `3` to identify the "peek" instruction.
- * - The `fsid` encoded as a 64-bit little-endian unsigned integer.
- * - The start and end positions (both 64-bit little-endian integers) representing the byte range to read.
- * - The file path as a UTF-8 encoded buffer.
- * - The wallet public key as a writable and signing account.
- *
  * @param fsid - A stringified integer representing the file system ID in which the file resides.
  * @param path - The path to the file to be peeked.
  * @param startPosition - The starting byte offset (inclusive) to begin reading from.

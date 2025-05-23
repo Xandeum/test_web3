@@ -7,11 +7,6 @@ import { sanitizePath } from './sanitizePath'
  * Constructs a Solana transaction to perform a "remove directory" operation
  * in a  file system, identified by a file system ID (`fsid`).
  *
- * This transaction includes:
- * - A discriminator byte `7` to identify the "remove directory" instruction.
- * - The `fsid` encoded as a 64-bit little-endian unsigned integer.
- * - The UTF-8 encoded path of the directory to be removed.
- *
  * @param fsid - A stringified integer representing the file system ID containing the directory.
  * @param path - The full path to the directory that should be removed.
  * @param wallet - The public key of the wallet that will sign and authorize the transaction.

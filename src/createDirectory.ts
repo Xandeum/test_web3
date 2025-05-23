@@ -6,11 +6,6 @@ import { sanitizePath } from './sanitizePath'
 /**
  * Constructs a Solana transaction to create a new directory within a  file system.
  *
- * The function builds the transaction instruction with:
- * - Instruction byte `6`
- * - FSID encoded as 8-byte little-endian
- * - UTF-8 encoded `path\0name` payload
- *
  * @param fsid - A numeric filesystem identifier used to scope the directory creation.
  * @param path - The parent path where the directory should be created (e.g., `/documents`).
  * @param name - The name of the new directory (e.g., `reports`).
