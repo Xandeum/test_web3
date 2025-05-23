@@ -1,6 +1,6 @@
 {
   "name": "test2-xandeum-web3",
-  "version": "9.1.0",
+  "version": "9.2.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
