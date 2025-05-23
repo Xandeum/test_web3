@@ -1,4 +1,4 @@
-[**Xandeum Web3 Library v9.2.0**](../README.md)
+[**Xandeum Web3 Library v9.3.0**](../README.md)
 
 ***
 
@@ -12,7 +12,6 @@ Defined in: [armageddon.ts:13](https://github.com/Xandeum/test_web3/blob/main/sr
 
 Constructs a Solana transaction that triggers the "armageddon" instruction
 on the specified file system (fsid).
-### Requested Fields:
 
 ## Parameters
 

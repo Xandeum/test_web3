@@ -1,4 +1,4 @@
-[**Xandeum Web3 Library v9.2.0**](../README.md)
+[**Xandeum Web3 Library v9.3.0**](../README.md)
 
 ***
 
