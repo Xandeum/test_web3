@@ -1,4 +1,4 @@
-[**Xandeum Web3 Library v9.0.0**](../README.md)
+[**Xandeum Web3 Library v9.2.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **unsubscribeResult**(`subscriptionId`, `wsUrl`): `void`
 
-Defined in: [webSocket.ts:86](https://github.com/Xandeum/test_web3/blob/main/src/webSocket.ts#L86)
+Defined in: [webSocket.ts:93](https://github.com/Xandeum/test_web3/blob/main/src/webSocket.ts#L93)
 
 Sends a WebSocket JSON-RPC message to unsubscribe from a previously subscribed transaction result
 using the `xandeumResultUnsubscribed` method (note: custom method, ensure server-side implementation matches).

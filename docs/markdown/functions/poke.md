@@ -1,4 +1,4 @@
-[**Xandeum Web3 Library v9.0.0**](../README.md)
+[**Xandeum Web3 Library v9.2.0**](../README.md)
 
 ***
 
@@ -8,17 +8,10 @@
 
 > **poke**(`fsid`, `path`, `position`, `wallet`, `dataKey`): `Promise`\<`Transaction`\>
 
-Defined in: [poke.ts:26](https://github.com/Xandeum/test_web3/blob/main/src/poke.ts#L26)
+Defined in: [poke.ts:19](https://github.com/Xandeum/test_web3/blob/main/src/poke.ts#L19)
 
 Constructs a Solana transaction to perform a poke\operation, which writes data
 to a file at the specified path and byte position.
-
-This transaction includes:
-- A discriminator byte `4` to identify the poke instruction.
-- The `fsid` encoded as a 64-bit little-endian unsigned integer.
-- The byte offset where data should be written.
-- The UTF-8 encoded file path.
-- Two accounts: the signer/writable wallet and a read-only data account (`dataKey`) holding the data to be written.
 
 ## Parameters
 

@@ -1,4 +1,4 @@
-[**Xandeum Web3 Library v9.0.0**](../README.md)
+[**Xandeum Web3 Library v9.2.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **subscribeResult**(`tx`, `wsUrl`, `onResult`, `onError?`, `onClose?`): `void`
 
-Defined in: [webSocket.ts:31](https://github.com/Xandeum/test_web3/blob/main/src/webSocket.ts#L31)
+Defined in: [webSocket.ts:38](https://github.com/Xandeum/test_web3/blob/main/src/webSocket.ts#L38)
 
 Opens a WebSocket connection and subscribes to the result of a transaction
 via the custom `xandeumResultSubscribe` method.

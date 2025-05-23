@@ -1,4 +1,4 @@
-[**Xandeum Web3 Library v9.0.0**](../README.md)
+[**Xandeum Web3 Library v9.2.0**](../README.md)
 
 ***
 
@@ -8,15 +8,10 @@
 
 > **removeDirectory**(`fsid`, `path`, `wallet`): `Promise`\<`Transaction`\>
 
-Defined in: [removeDirectory.ts:22](https://github.com/Xandeum/test_web3/blob/main/src/removeDirectory.ts#L22)
+Defined in: [removeDirectory.ts:17](https://github.com/Xandeum/test_web3/blob/main/src/removeDirectory.ts#L17)
 
 Constructs a Solana transaction to perform a "remove directory" operation
 in a  file system, identified by a file system ID (`fsid`).
-
-This transaction includes:
-- A discriminator byte `7` to identify the "remove directory" instruction.
-- The `fsid` encoded as a 64-bit little-endian unsigned integer.
-- The UTF-8 encoded path of the directory to be removed.
 
 ## Parameters
 

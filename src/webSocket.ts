@@ -1,5 +1,12 @@
 import WebSocket from 'ws'
-
+/**
+ * Represents the structure of result data received from a WebSocket subscription.
+ *
+ * - `fsid` (optional): The file system ID returned from the result.
+ * - `status` (optional): The status of the transaction or operation.
+ * - `data` (optional): Any custom payload or message associated with the result.
+ * - `subscription` (optional): The ID of the WebSocket subscription.
+ */
 type ResultValue = {
   fsid?: string
   status?: string
@@ -89,7 +96,7 @@ export function unsubscribeResult (subscriptionId: string, wsUrl: string): void 
     const unsubscribeMessage = {
       jsonrpc: '2.0',
       id: 2,
-      method: 'xandeumResultUnscribe', // ✅ fixed typo
+      method: 'xandeumResultUnsubscribe',
       params: [subscriptionId]
     }
 

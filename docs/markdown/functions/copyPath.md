@@ -1,4 +1,4 @@
-[**Xandeum Web3 Library v9.0.0**](../README.md)
+[**Xandeum Web3 Library v9.2.0**](../README.md)
 
 ***
 
@@ -8,14 +8,9 @@
 
 > **copyPath**(`fsid`, `srcPath`, `destPath`, `wallet`): `Promise`\<`Transaction`\>
 
-Defined in: [copyPath.ts:23](https://github.com/Xandeum/test_web3/blob/main/src/copyPath.ts#L23)
+Defined in: [copyPath.ts:18](https://github.com/Xandeum/test_web3/blob/main/src/copyPath.ts#L18)
 
 Constructs a Solana transaction to copy a file or directory from one  path to another.
-
-The payload includes:
-- Opcode `9` (1 byte)
-- Filesystem ID (`fsid`) encoded as 8 bytes little-endian
-- UTF-8 encoded `srcPath\0destPath`
 
 ## Parameters
 

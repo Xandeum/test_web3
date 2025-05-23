@@ -1,4 +1,4 @@
-[**Xandeum Web3 Library v9.0.0**](../README.md)
+[**Xandeum Web3 Library v9.2.0**](../README.md)
 
 ***
 
@@ -8,15 +8,10 @@
 
 > **removeFile**(`fsid`, `path`, `wallet`): `Promise`\<`Transaction`\>
 
-Defined in: [removeFile.ts:22](https://github.com/Xandeum/test_web3/blob/main/src/removeFile.ts#L22)
+Defined in: [removeFile.ts:17](https://github.com/Xandeum/test_web3/blob/main/src/removeFile.ts#L17)
 
 Constructs a Solana transaction to remove a file from a  file system,
 identified by a file system ID (`fsid`) and a UTF-8 encoded file path.
-
-This transaction includes:
-- A discriminator byte `5` to identify the "remove file" instruction.
-- The `fsid` encoded as a 64-bit little-endian unsigned integer.
-- The file path to be removed, encoded as UTF-8 bytes.
 
 ## Parameters
 

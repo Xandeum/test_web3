@@ -9,7 +9,7 @@ import { sanitizePath } from './sanitizePath'
  *
  * @param fsid - A stringified integer representing the file system ID where the path exists.
  * @param oldPath - The current path of the file or directory to be renamed or moved.
- * @param name - The name of the file or directory to rename.
+ * @param name - The new name to assign to the file or directory.
  * @param wallet - The public key of the wallet that signs and authorizes the transaction.
  * @returns A Promise that resolves to a Solana `Transaction` object containing the rename path instruction.
  * @throws May throw an error if either `oldPath` or `newPath` is invalid per `sanitizePath`.
@@ -18,14 +18,14 @@ import { sanitizePath } from './sanitizePath'
 export async function renamePath (
   fsid: string,
   oldPath: string,
-  newPath: string,
+  name: string,
   wallet: PublicKey
 ): Promise<Transaction> {
   sanitizePath(oldPath)
 
-  sanitizePath(newPath)
+  sanitizePath(name)
 
-  const rest = Buffer.from(`${oldPath}\0${newPath}`, 'utf-8')
+  const rest = Buffer.from(`${oldPath}\0${name}`, 'utf-8')
 
   const instructionData = Buffer.concat([
     Buffer.from(Int8Array.from([8]).buffer),
