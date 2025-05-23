@@ -6,7 +6,7 @@
 
 # Function: renamePath()
 
-> **renamePath**(`fsid`, `oldPath`, `newPath`, `wallet`): `Promise`\<`Transaction`\>
+> **renamePath**(`fsid`, `oldPath`, `name`, `wallet`): `Promise`\<`Transaction`\>
 
 Defined in: [renamePath.ts:18](https://github.com/Xandeum/test_web3/blob/main/src/renamePath.ts#L18)
 
@@ -27,9 +27,11 @@ A stringified integer representing the file system ID where the path exists.
 
 The current path of the file or directory to be renamed or moved.
 
-### newPath
+### name
 
 `string`
+
+The new name to assign to the file or directory.
 
 ### wallet
 
