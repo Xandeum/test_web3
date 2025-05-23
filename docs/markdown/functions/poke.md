@@ -1,0 +1,63 @@
+[**Xandeum Web3 Library v9.0.0**](../README.md)
+
+***
+
+[Xandeum Web3 Library](../globals.md) / poke
+
+# Function: poke()
+
+> **poke**(`fsid`, `path`, `position`, `wallet`, `dataKey`): `Promise`\<`Transaction`\>
+
+Defined in: [poke.ts:26](https://github.com/Xandeum/test_web3/blob/main/src/poke.ts#L26)
+
+Constructs a Solana transaction to perform a poke\operation, which writes data
+to a file at the specified path and byte position.
+
+This transaction includes:
+- A discriminator byte `4` to identify the poke instruction.
+- The `fsid` encoded as a 64-bit little-endian unsigned integer.
+- The byte offset where data should be written.
+- The UTF-8 encoded file path.
+- Two accounts: the signer/writable wallet and a read-only data account (`dataKey`) holding the data to be written.
+
+## Parameters
+
+### fsid
+
+`string`
+
+A stringified integer representing the file system ID where the file resides.
+
+### path
+
+`string`
+
+The path to the file to be written to.
+
+### position
+
+`number`
+
+The byte offset in the file where data should be written.
+
+### wallet
+
+`PublicKey`
+
+The public key of the wallet that signs and authorizes the transaction.
+
+### dataKey
+
+`PublicKey`
+
+A public key of a data account that holds the content to be written to the file.
+
+## Returns
+
+`Promise`\<`Transaction`\>
+
+A Promise that resolves to a Solana `Transaction` object containing the poke instruction.
+
+## Throws
+
+Will throw an error if the `path` contains invalid characters.
