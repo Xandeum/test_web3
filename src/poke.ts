@@ -7,13 +7,6 @@ import { sanitizePath } from './sanitizePath'
  * Constructs a Solana transaction to perform a poke\operation, which writes data
  * to a file at the specified path and byte position.
  *
- * This transaction includes:
- * - A discriminator byte `4` to identify the poke instruction.
- * - The `fsid` encoded as a 64-bit little-endian unsigned integer.
- * - The byte offset where data should be written.
- * - The UTF-8 encoded file path.
- * - Two accounts: the signer/writable wallet and a read-only data account (`dataKey`) holding the data to be written.
- *
  * @param fsid - A stringified integer representing the file system ID where the file resides.
  * @param path - The path to the file to be written to.
  * @param position - The byte offset in the file where data should be written.

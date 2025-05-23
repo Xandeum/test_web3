@@ -6,11 +6,6 @@ import { sanitizePath } from './sanitizePath'
 /**
  * Constructs a Solana transaction to copy a file or directory from one  path to another.
  *
- * The payload includes:
- * - Opcode `9` (1 byte)
- * - Filesystem ID (`fsid`) encoded as 8 bytes little-endian
- * - UTF-8 encoded `srcPath\0destPath`
- *
  * @param fsid - The unique numeric identifier representing the target file system.
  * @param srcPath - The source path to copy from (e.g., `/documents/report.txt`).
  * @param destPath - The destination path to copy to (e.g., `/archive/report.txt`).

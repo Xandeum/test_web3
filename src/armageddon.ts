@@ -4,7 +4,7 @@ import { programId } from './const.js'
 
 /**
  * Constructs a Solana transaction that triggers the "armageddon" instruction
- * on the specified file system ID (fsid).
+ * on the specified file system (fsid).
  *
  * @param fsid - A stringified integer representing the file system ID to be used in the instruction.
  * @param wallet - The public key of the wallet that will sign and authorize the transaction.

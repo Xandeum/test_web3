@@ -6,13 +6,7 @@ import { sanitizePath } from './sanitizePath'
 /**
  * Constructs a Solana transaction to create a new file
  * within a file system, identified by a file system ID (`fsid`).
- *
- * This transaction includes:
- * - A discriminator byte `2` to identify the "create file" operation.
- * - The `fsid` encoded as a 64-bit little-endian unsigned integer.
- * - A UTF-8 encoded payload combining the `path` and `name`, separated by a null terminator.
- * - The wallet public key as a signer and writable account.
- *
+ * 
  * @param fsid - A stringified integer representing the file system ID where the file is to be created.
  * @param path - The absolute or relative path within the file system where the file should be created.
  * @param name - The name of the new file or directory to be created.
