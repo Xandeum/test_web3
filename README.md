@@ -95,13 +95,67 @@ getMetadata
 
 All functions that accept a file or directory path will validate inputs using sanitizePath to prevent invalid characters.
 
-🔧 Requirements
+🌐 WebSocket Subscription
 
-Node.js 16+
-Solana wallet and signer
-RPC endpoint for the Solana network
-Compatible with @solana/web3.js
-📄 License
+subscribeResult(tx: string, wsUrl: string, onResult: (result: ResultValue) => void, onError?: (err: any) => void, onClose?: () => void): void
+Subscribes to results from a transaction via WebSocket. Useful for listening for async events triggered by the transaction.
+
+Parameters:
+
+tx — Transaction signature to subscribe to
+wsUrl — WebSocket endpoint (wss://...)
+onResult(result) — Called when a valid result is received
+onError(err) — Optional callback for connection errors
+onClose() — Optional callback for connection closure
+Example:
+
+```
+subscribeResult(
+  'transactionSignatureHere',
+  'wss://xandeum-node.com/ws',
+  result => {
+    console.log('Status:', result.status)
+    console.log('FSID:', result.fsid)
+    console.log('Data:', result.data)
+  }
+)
+```
+
+Example
+```
+import {
+  bigbang,
+  createFile,
+  poke,
+  peek,
+  subscribeResult
+} from '@xandeum/fs-transaction'
+
+import {
+  Connection,
+  sendAndConfirmTransaction,
+  Keypair
+} from '@solana/web3.js'
+
+const connection = new Connection('https://api.mainnet-beta.solana.com')
+const signer = Keypair.generate()
+const wallet = signer.publicKey
+
+async function main() {
+  const tx = await createFile('42', '/hello.txt', wallet)
+  const txSignature = await sendAndConfirmTransaction(connection, tx, [signer])
+
+  subscribeResult(
+    txSignature,
+    'wss://xandeum-websocket-endpoint.com',
+    result => {
+      console.log('Received result:', result)
+    },
+    err => console.error('WebSocket error:', err),
+    () => console.log('WebSocket closed')
+  )
+}
+```
 
 MIT © Xandeum
 
