@@ -84,14 +84,14 @@ Reads bytes from a file.
 copyPath(fsid: string, srcPath: string, destPath: string, wallet: PublicKey): Promise<Transaction>
 Copies a file or directory from one path to another.
 
-Other available functions
-renamePath
-removeFile
-removeDirectory
-createDirectory
-exists
-listDirectoryEntry
-getMetadata
+Other available functions \n
+renamePath \n
+removeFile \n
+removeDirectory \n
+createDirectory \n
+exists \n
+listDirectoryEntry \n
+getMetadata \n
 
 All functions that accept a file or directory path will validate inputs using sanitizePath to prevent invalid characters.
 
