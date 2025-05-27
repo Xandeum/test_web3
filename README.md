@@ -97,13 +97,13 @@ All functions that accept a file or directory path will validate inputs using sa
 
 ## 🌐 WebSocket Subscription
 
-subscribeResult(tx: string, wsUrl: string, onResult: (result: ResultValue) => void, onError?: (err: any) => void, onClose?: () => void): void
+subscribeResult(connection: Connection,tx: string, onResult: (result: ResultValue) => void, onError?: (err: any) => void, onClose?: () => void): void
 Subscribes to results from a transaction via WebSocket. Used for listening  events triggered by the transaction.
 
 #### Parameters:
 
+connection - The solana web3 connection with Xandeum-compatible JSON-RPC endpoint (e.g., `'https://api.devnet.solana.com'`).
 tx — Transaction signature to subscribe to
-wsUrl — WebSocket endpoint (wss://...)
 onResult(result) — Called when a valid result is received
 onError(err) — Optional callback for connection errors
 onClose() — Optional callback for connection closure
@@ -111,8 +111,8 @@ Example:
 
 ```
 subscribeResult(
+  connection,
   'transactionSignatureHere',
-  'wss://xandeum-node.com/ws',
   result => {
     console.log('Result:', result)
   }
@@ -140,12 +140,12 @@ const signer = Keypair.generate()
 const wallet = signer.publicKey
 
 async function main() {
-  const tx = await createFile('42', '/hello.txt', wallet)
+  const tx = await createFile('1', '/1/hello.txt', wallet)
   const txSignature = await sendAndConfirmTransaction(connection, tx, [signer])
 
   subscribeResult(
+    connection,
     txSignature,
-    'wss://xandeum-websocket-endpoint.com',
     result => {
       console.log('Received result:', result)
     },
