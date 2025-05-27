@@ -1,4 +1,6 @@
 import WebSocket from 'ws'
+import { PublicKey, Transaction, TransactionInstruction, Keypair, Connection, clusterApiUrl,ComputeBudgetProgram } from "@solana/web3.js"
+
 /**
  * Represents the structure of result data received from a WebSocket subscription.
  *
@@ -29,7 +31,7 @@ type ResultValue = {
  * if a valid result with `fsid`, `status`, or `data` is received.
  *
  * @param tx - The transaction ID you want to listen for results from.
- * @param wsUrl - The full WebSocket endpoint (e.g., `wss://...`) to connect to.
+ * @param connection - The solana web connection.
  * @param onResult - Callback to handle incoming result messages. Triggered when a valid response is received.
  * @param onError - (Optional) Callback triggered if a WebSocket error occurs.
  * @param onClose - (Optional) Callback triggered when the WebSocket connection closes.
@@ -37,12 +39,12 @@ type ResultValue = {
 
 export function subscribeResult (
   tx: string,
-  wsUrl: string,
+  connection: Connection,
   onResult: (value: ResultValue) => void,
   onError?: (err: any) => void,
   onClose?: () => void
 ): void {
-  const ws = new WebSocket(wsUrl)
+  const ws = new WebSocket(connection.rpcEndpoint.replace('http', 'ws'));
 
   ws.addEventListener('open', () => {
     const subscriptionMessage = {
@@ -90,8 +92,10 @@ export function subscribeResult (
  * @param wsUrl - The WebSocket endpoint (e.g., `wss://...`) to connect to for unsubscribing.
  */
 
-export function unsubscribeResult (subscriptionId: string, wsUrl: string): void {
-  const ws = new WebSocket(wsUrl)
+export function unsubscribeResult (subscriptionId: string, connection: Connection): void {
+//   const ws = new WebSocket(wsUrl)
+    const ws = new WebSocket(connection.rpcEndpoint.replace('http', 'ws'));
+
   ws.addEventListener('open', () => {
     const unsubscribeMessage = {
       jsonrpc: '2.0',
