@@ -103,7 +103,7 @@ RPC endpoint for the Solana network
 Compatible with @solana/web3.js
 📄 License
 
-MIT © [Your Name or Organization]
+MIT © Xandeum
 
 👤 Author
 
