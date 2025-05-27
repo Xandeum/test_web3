@@ -64,7 +64,7 @@ async function main() {
 }
 ```
 
-### 🧩 API Overview
+## 🧩 API Overview
 
 bigbang(wallet: PublicKey): Promise<Transaction>
 Creates a new file system account.
@@ -95,7 +95,7 @@ getMetadata
 
 All functions that accept a file or directory path will validate inputs using sanitizePath to prevent invalid characters.
 
-### 🌐 WebSocket Subscription
+## 🌐 WebSocket Subscription
 
 subscribeResult(tx: string, wsUrl: string, onResult: (result: ResultValue) => void, onError?: (err: any) => void, onClose?: () => void): void
 Subscribes to results from a transaction via WebSocket. Useful for listening for async events triggered by the transaction.
