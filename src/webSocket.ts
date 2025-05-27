@@ -31,20 +31,21 @@ type ResultValue = {
  * if a valid result with `fsid`, `status`, or `data` is received.
  *
  * @param tx - The transaction ID you want to listen for results from.
- * @param connection - The solana web connection.
+ * @param connection - The solana web3 connection with Xandeum-compatible JSON-RPC endpoint (e.g., `'https://api.devnet.solana.com'`).
  * @param onResult - Callback to handle incoming result messages. Triggered when a valid response is received.
  * @param onError - (Optional) Callback triggered if a WebSocket error occurs.
  * @param onClose - (Optional) Callback triggered when the WebSocket connection closes.
  */
 
 export function subscribeResult (
-  tx: string,
   connection: Connection,
+  tx: string,
   onResult: (value: ResultValue) => void,
   onError?: (err: any) => void,
   onClose?: () => void
 ): void {
-  const ws = new WebSocket(connection.rpcEndpoint.replace('http', 'ws'));
+  let rpcEndpoint = connection.rpcEndpoint;
+  const ws = new WebSocket(rpcEndpoint.replace('http', 'ws'));
 
   ws.addEventListener('open', () => {
     const subscriptionMessage = {
@@ -89,12 +90,12 @@ export function subscribeResult (
  * This function automatically closes the WebSocket connection after sending the unsubscribe request.
  *
  * @param subscriptionId - The ID of the active subscription you want to cancel.
- * @param wsUrl - The WebSocket endpoint (e.g., `wss://...`) to connect to for unsubscribing.
+ * @param connection - The solana web3 connection with Xandeum-compatible JSON-RPC endpoint (e.g., `'https://api.devnet.solana.com'`).
  */
 
-export function unsubscribeResult (subscriptionId: string, connection: Connection): void {
-//   const ws = new WebSocket(wsUrl)
-    const ws = new WebSocket(connection.rpcEndpoint.replace('http', 'ws'));
+export function unsubscribeResult(connection: Connection,subscriptionId: string): void {
+    let rpcEndpoint = connection.rpcEndpoint;
+    const ws = new WebSocket(rpcEndpoint.replace('http', 'ws'));
 
   ws.addEventListener('open', () => {
     const unsubscribeMessage = {
