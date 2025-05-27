@@ -1,13 +1,13 @@
 # @xandeum/web3
 
-> Solana transaction builder for interacting with a virtual file system on the Xandeum network.
+> Solana transaction builder for interacting with a file system on the Xandeum network.
 
-This package provides a JavaScript/TypeScript interface to construct Solana transactions for creating, modifying, and managing virtual file systems on-chain using the Xandeum program.
+This package provides a JavaScript/TypeScript interface to construct Solana transactions for creating, modifying, and managing  file systems on-chain using the Xandeum program.
 
 ## ✨ Features
 
-- Create and destroy file systems (`bigbang`, `armageddon`)
-- Manage files and directories (create, rename, remove, copy)
+- Create and delete file systems (`bigbang`, `armageddon`)
+- Manage files and directories (`create`, `rename`, `remove`, `copy`)
 - Read and write file contents with byte-level control (`peek`, `poke`)
 - Secure path validation and serialization
 - Compatible with `@solana/web3.js`
@@ -15,12 +15,17 @@ This package provides a JavaScript/TypeScript interface to construct Solana tran
 ## 📦 Installation
 
 ```bash
-npm install @xandeum/fs-transaction
+npm install test2-xandeum-web3
+``` 
+
 or
 
-yarn add @xandeum/fs-transaction
+```
+yarn add test2-xandeum-web3
+```
 🚀 Usage
 
+```
 import {
   bigbang,
   armageddon,
@@ -28,7 +33,7 @@ import {
   poke,
   peek,
   copyPath
-} from '@xandeum/fs-transaction'
+} from 'test2-xandeum-web3'
 
 import {
   Connection,
@@ -36,7 +41,7 @@ import {
   Keypair
 } from '@solana/web3.js'
 
-const connection = new Connection('https://api.mainnet-beta.solana.com')
+const connection = new Connection('https://apis.devnet.xandeum.com)
 const signer = Keypair.generate()
 const wallet = signer.publicKey
 
@@ -46,18 +51,20 @@ async function main() {
   await sendAndConfirmTransaction(connection, tx1, [signer])
 
   // Create a file
-  const tx2 = await createFile('1', '/hello.txt', wallet)
+  const tx2 = await createFile('1', '/1','hello.txt', wallet)
   await sendAndConfirmTransaction(connection, tx2, [signer])
 
   // Write data
-  const tx3 = await poke('1', '/hello.txt', 0, Buffer.from('Hello Xandeum!'), wallet)
+  const tx3 = await poke('1', '/1/hello.txt', 0, Buffer.from('Hello Xandeum!'), wallet)
   await sendAndConfirmTransaction(connection, tx3, [signer])
 
   // Read data
-  const tx4 = await peek('1', '/hello.txt', 0, 14, wallet)
+  const tx4 = await peek('1', '/1/hello.txt', 0, 14, wallet)
   await sendAndConfirmTransaction(connection, tx4, [signer])
 }
-🧩 API Reference
+```
+
+🧩 API Overview
 
 bigbang(wallet: PublicKey): Promise<Transaction>
 Creates a new file system account.
@@ -85,7 +92,6 @@ createDirectory
 exists
 listDirectoryEntry
 getMetadata
-🧼 Path Validation
 
 All functions that accept a file or directory path will validate inputs using sanitizePath to prevent invalid characters.
 
@@ -101,9 +107,6 @@ MIT © [Your Name or Organization]
 
 👤 Author
 
-Built by [Your Name or Team] to provide decentralized, programmable file systems on Solana via the Xandeum protocol.
+Built by Xandeum to provide decentralized, programmable file systems on Solana via the Xandeum protocol.
 
 
----
-
-Would you like this saved as a `.md` file that I can generate for you to download directly?
