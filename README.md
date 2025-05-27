@@ -114,9 +114,7 @@ subscribeResult(
   'transactionSignatureHere',
   'wss://xandeum-node.com/ws',
   result => {
-    console.log('Status:', result.status)
-    console.log('FSID:', result.fsid)
-    console.log('Data:', result.data)
+    console.log('Result:', result)
   }
 )
 ```
