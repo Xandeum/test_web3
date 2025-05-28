@@ -20,7 +20,7 @@ export async function createFile (
   name: string,
   wallet: PublicKey
 ): Promise<Transaction> {
-  let combinedPath = path + '/' + name
+  const combinedPath = path.endsWith('/') ? `${path}${name}` : `${path}/${name}`
   sanitizePath(combinedPath);
 
   const rest = Buffer.from(`${path}\0${name}`, 'utf-8')

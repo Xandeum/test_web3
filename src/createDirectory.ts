@@ -21,7 +21,7 @@ export async function createDirectory (
   wallet: PublicKey
 ): Promise<Transaction> {
   // Validate path: only letters, numbers, and /
-  let combinedPath = path + '/' + name
+  const combinedPath = path.endsWith('/') ? `${path}${name}` : `${path}/${name}`
   sanitizePath(combinedPath)
   const rest = Buffer.from(`${path}\0${name}`, 'utf-8')
   const instructionData = Buffer.concat([
