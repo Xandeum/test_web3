@@ -88,9 +88,9 @@ export function subscribeResult (
  * using the `xandeumResultUnsubscribed` method (note: custom method, ensure server-side implementation matches).
  *
  * This function automatically closes the WebSocket connection after sending the unsubscribe request.
- *
- * @param subscriptionId - The ID of the active subscription you want to cancel.
+ * 
  * @param connection - The solana web3 connection with Xandeum-compatible JSON-RPC endpoint (e.g., `'https://api.devnet.solana.com'`).
+ * @param subscriptionId - The ID of the active subscription you want to cancel.
  */
 
 export function unsubscribeResult(connection: Connection,subscriptionId: string): void {
