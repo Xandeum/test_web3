@@ -1,8 +1,8 @@
-**Xandeum Web3 Library v1.0.0**
+**Xandeum Web3 Library v1.1.0**
 
 ***
 
-# @xandeum/web3
+# @xandeum/web3.js
 
 > Solana transaction builder for interacting with a file system on the Xandeum network.
 
@@ -19,13 +19,13 @@ This package provides a JavaScript/TypeScript interface to construct Solana tran
 ## 📦 Installation
 
 ```bash
-npm install test2-xandeum-web3
+npm install @xandeum/web3.js
 ``` 
 
 or
 
 ```
-yarn add test2-xandeum-web3
+yarn add @xandeum/web3.js
 ```
 🚀 Usage
 
@@ -37,7 +37,7 @@ import {
   poke,
   peek,
   copyPath
-} from 'test2-xandeum-web3'
+} from '@xandeum/web3.js'
 
 import {
   Connection,
@@ -131,7 +131,7 @@ import {
   poke,
   peek,
   subscribeResult
-} from '@xandeum/fs-transaction'
+} from '@xandeum/web3.js'
 
 import {
   Connection,
