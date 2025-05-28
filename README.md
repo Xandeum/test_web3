@@ -155,7 +155,7 @@ async function main() {
 }
 ```
 
-MIT © Xandeum
+Apache-2.0 © Xandeum
 
 👤 Author
 

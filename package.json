@@ -9,7 +9,7 @@
     "deploy-docs": "typedoc && gh-pages -d docs"
   },
   "author": "",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "publishConfig": {
     "access": "public"
   },
