@@ -1,4 +1,4 @@
-[**Xandeum Web3 Library v9.3.0**](../README.md)
+[**Xandeum Web3 Library v1.0.0**](../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # Function: listDirectoryEntry()
 
-> **listDirectoryEntry**(`path`, `url`): `Promise`\<`any`\>
+> **listDirectoryEntry**(`connection`, `path`): `Promise`\<`any`\>
 
-Defined in: [listDirectoryEntery.ts:22](https://github.com/Xandeum/test_web3/blob/main/src/listDirectoryEntery.ts#L22)
+Defined in: [listDirectoryEntery.ts:24](https://github.com/Xandeum/test_web3/blob/main/src/listDirectoryEntery.ts#L24)
 
 Sends a JSON-RPC request to the Xandeum RPC endpoint to list all entries (files and subdirectories)
 within a specified path.
@@ -18,17 +18,17 @@ directory entry metadata — names, types etc.
 
 ## Parameters
 
+### connection
+
+`Connection`
+
+The solana web3 connection with Xandeum-compatible JSON-RPC endpoint (e.g., `'https://api.devnet.solana.com'`).
+
 ### path
 
 `string`
 
 The  filesystem path representing the directory to list (e.g., `/documents`).
-
-### url
-
-`string`
-
-The full URL of the Xandeum-compatible JSON-RPC endpoint (e.g., `'https://api.devnet.solana.com'`).
 
 ## Returns
 

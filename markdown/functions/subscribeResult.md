@@ -1,4 +1,4 @@
-[**Xandeum Web3 Library v9.3.0**](../README.md)
+[**Xandeum Web3 Library v1.0.0**](../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # Function: subscribeResult()
 
-> **subscribeResult**(`tx`, `wsUrl`, `onResult`, `onError?`, `onClose?`): `void`
+> **subscribeResult**(`connection`, `tx`, `onResult`, `onError?`, `onClose?`): `void`
 
-Defined in: [webSocket.ts:38](https://github.com/Xandeum/test_web3/blob/main/src/webSocket.ts#L38)
+Defined in: [webSocket.ts:40](https://github.com/Xandeum/test_web3/blob/main/src/webSocket.ts#L40)
 
 Opens a WebSocket connection and subscribes to the result of a transaction
 via the custom `xandeumResultSubscribe` method.
@@ -25,17 +25,17 @@ if a valid result with `fsid`, `status`, or `data` is received.
 
 ## Parameters
 
+### connection
+
+`Connection`
+
+The solana web3 connection with Xandeum-compatible JSON-RPC endpoint (e.g., `'https://api.devnet.solana.com'`).
+
 ### tx
 
 `string`
 
 The transaction ID you want to listen for results from.
-
-### wsUrl
-
-`string`
-
-The full WebSocket endpoint (e.g., `wss://...`) to connect to.
 
 ### onResult
 
