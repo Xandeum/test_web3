@@ -51,15 +51,15 @@ async function main() {
   await sendAndConfirmTransaction(connection, tx1, [signer])
 
   // Create a file
-  const tx2 = await createFile('1', '/1','hello.txt', wallet)
+  const tx2 = await createFile('1', '/','hello.txt', wallet)
   await sendAndConfirmTransaction(connection, tx2, [signer])
 
   // Write data
-  const tx3 = await poke('1', '/1/hello.txt', 0, Buffer.from('Hello Xandeum!'), wallet)
+  const tx3 = await poke('1', '/hello.txt', 0, Buffer.from('Hello Xandeum!'), wallet)
   await sendAndConfirmTransaction(connection, tx3, [signer])
 
   // Read data
-  const tx4 = await peek('1', '/1/hello.txt', 0, 14, wallet)
+  const tx4 = await peek('1', '/hello.txt', 0, 14, wallet)
   await sendAndConfirmTransaction(connection, tx4, [signer])
 }
 ```
@@ -140,7 +140,7 @@ const signer = Keypair.generate()
 const wallet = signer.publicKey
 
 async function main() {
-  const tx = await createFile('1', '/1/hello.txt', wallet)
+  const tx = await createFile('1', '/hello.txt', wallet)
   const txSignature = await sendAndConfirmTransaction(connection, tx, [signer])
 
   subscribeResult(
