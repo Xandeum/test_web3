@@ -1,3 +1,5 @@
+import { Connection } from "@solana/web3.js"
+
 export interface RpcRequest {
   jsonrpc: string
   id: number
@@ -10,16 +12,16 @@ export interface RpcRequest {
  *
  * This function calls the custom RPC method `isExist`, which should be implemented
  * by the backend to validate the existence of metadata (files/directories) at a given path.
- *
+ * @param connection - The solana web3 connection with Xandeum-compatible JSON-RPC endpoint (e.g., `'https://api.devnet.solana.com'`).
  * @param path - The filesystem path to check (e.g., `/documents/myfile.txt`).
- * @param url - The full URL of the Xandeum-compatible JSON-RPC endpoint (e.g., `'https://api.devnet.solana.com'`).
  *
  * @returns A `Promise<any>` resolving to the RPC response JSON, typically including a `result` field
  *          indicating existence (e.g., `true` or `false`), or `null` if not found.
  *
  */
 
-export async function exists (path: string, url: string): Promise<any> {
+  export async function exists (connection: Connection,path: string): Promise<any> {
+  const url = connection.rpcEndpoint;
   const requestBody: RpcRequest = {
     jsonrpc: '2.0',
     id: 1,

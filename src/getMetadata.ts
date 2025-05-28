@@ -1,3 +1,5 @@
+import { Connection } from "@solana/web3.js"
+
 export interface RpcRequest {
   jsonrpc: string
   id: number
@@ -13,15 +15,16 @@ export interface RpcRequest {
  * by the backend to return metadata such as type (file or directory), size,
  * timestamps etc.
  *
+ * @param connection - The solana web3 connection with Xandeum-compatible JSON-RPC endpoint (e.g., `'https://api.devnet.solana.com'`).
  * @param path - The filesystem path to query metadata for (e.g., `/documents/myfile.txt`).
- * @param url - The full URL of the Xandeum-compatible JSON-RPC endpoint (e.g., `'https://api.devnet.solana.com'`).
  *
  * @returns A `Promise<any>` resolving to the parsed JSON response from the RPC server,
  *          typically containing a `result` object with metadata fields.
  *
  */
 
-export async function getMetadata (path: string, url: string): Promise<any> {
+export async function getMetadata (connection: Connection,path: string): Promise<any> {
+  const url = connection.rpcEndpoint;
   const requestBody: RpcRequest = {
     jsonrpc: '2.0',
     id: 1,

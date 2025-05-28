@@ -1,6 +1,8 @@
 {
-  "name": "test2-xandeum-web3",
-  "version": "9.3.0",
+  "name": "@xandeum/web3.js",
+  "version": "1.0.0",
+  "description": "Xandeum javascript api",
+
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -8,8 +10,10 @@
     "deploy-docs": "typedoc && gh-pages -d docs"
   },
   "author": "",
-  "license": "ISC",
-  "description": "",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@solana/web3.js": "^1.98.2",
     "ws": "^8.18.2"
