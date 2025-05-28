@@ -1,4 +1,4 @@
-[**Xandeum Web3 Library v9.3.0**](../README.md)
+[**Xandeum Web3 Library v1.0.0**](../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # Function: exists()
 
-> **exists**(`path`, `url`): `Promise`\<`any`\>
+> **exists**(`connection`, `path`): `Promise`\<`any`\>
 
-Defined in: [exists.ts:22](https://github.com/Xandeum/test_web3/blob/main/src/exists.ts#L22)
+Defined in: [exists.ts:23](https://github.com/Xandeum/test_web3/blob/main/src/exists.ts#L23)
 
 Sends a JSON-RPC request to the Xandeum RPC endpoint to check if a file or directory exists.
 
@@ -17,17 +17,17 @@ by the backend to validate the existence of metadata (files/directories) at a gi
 
 ## Parameters
 
+### connection
+
+`Connection`
+
+The solana web3 connection with Xandeum-compatible JSON-RPC endpoint (e.g., `'https://api.devnet.solana.com'`).
+
 ### path
 
 `string`
 
 The filesystem path to check (e.g., `/documents/myfile.txt`).
-
-### url
-
-`string`
-
-The full URL of the Xandeum-compatible JSON-RPC endpoint (e.g., `'https://api.devnet.solana.com'`).
 
 ## Returns
 
