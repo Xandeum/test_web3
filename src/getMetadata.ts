@@ -41,7 +41,8 @@ export async function getMetadata (connection: Connection,path: string): Promise
   })
 
   if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`)
+    const errorText = await response.text(); 
+    return Error(`error! status: ${response.status}, message: ${errorText}`);
   }
 
   const data = await response.json()

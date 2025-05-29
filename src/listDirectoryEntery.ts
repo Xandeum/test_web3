@@ -42,8 +42,8 @@ export async function listDirectoryEntry (
   })
 
   if (!response.ok) {
-    const errorText = await response.text(); // or response.json() if JSON is expected
-    throw new Error(`${response}`)
+    const errorText = await response.text(); 
+    return Error(`error! status: ${response.status}, message: ${errorText}`);
   }
 
   const data = await response.json()
