@@ -42,7 +42,8 @@ export async function listDirectoryEntry (
   })
 
   if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`)
+    const errorText = await response.text(); // or response.json() if JSON is expected
+    throw new Error(`${response}`)
   }
 
   const data = await response.json()
