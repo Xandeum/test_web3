@@ -33,7 +33,7 @@ export async function move (
   const rest = Buffer.from(`${srcPath}\0${destPath}\0${name}`, 'utf-8')
 
   const instructionData = Buffer.concat([
-    Buffer.from(Int8Array.from([9]).buffer),
+    Buffer.from(Int8Array.from([13]).buffer),
     Buffer.from(Uint8Array.of(...new BN(fsid).toArray('le', 8))),
     rest
   ])

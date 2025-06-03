@@ -9,6 +9,7 @@ export * from "./peek";
 export * from "./poke";
 export * from "./removeDirectory";
 export * from "./copyPath";
+export * from "./move";
 
 export {exists } from "./exists";
 export {listDirectoryEntry} from "./listDirectoryEntery";
