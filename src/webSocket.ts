@@ -45,7 +45,14 @@ export function subscribeResult (
   onClose?: () => void
 ): void {
   let rpcEndpoint = connection.rpcEndpoint;
-  const ws = new WebSocket(rpcEndpoint.replace('http', 'ws'));
+  const url = new URL(rpcEndpoint);
+  // url.port = '8900'; // Set the port to 8900
+   if (url.port) {
+    url.port = '8900';
+  }
+  url.protocol = url.protocol.replace('http', 'ws'); 
+  const wsEndpoint = url.toString();
+  const ws = new WebSocket(wsEndpoint);
 
   ws.addEventListener('open', () => {
     const subscriptionMessage = {
@@ -94,8 +101,14 @@ export function subscribeResult (
  */
 
 export function unsubscribeResult(connection: Connection,subscriptionId: string): void {
-    let rpcEndpoint = connection.rpcEndpoint;
-    const ws = new WebSocket(rpcEndpoint.replace('http', 'ws'));
+  let rpcEndpoint = connection.rpcEndpoint;
+  const url = new URL(rpcEndpoint);
+  if (url.port) {
+    url.port = '8900';
+  }
+  url.protocol = url.protocol.replace('http', 'ws'); 
+  const wsEndpoint = url.toString();
+  const ws = new WebSocket(wsEndpoint);
 
   ws.addEventListener('open', () => {
     const unsubscribeMessage = {
