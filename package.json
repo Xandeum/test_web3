@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "deploy-docs": "typedoc && gh-pages -d docs"
+    "deploy-docs": "typedoc && gh-pages -d docs/html"
   },
   "author": "",
   "license": "Apache-2.0",

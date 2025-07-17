@@ -1,8 +1,7 @@
 {
     "$schema": "https://typedoc.org/schema.json",
     "entryPoints": ["src/index.ts"],
-    "plugin": ["typedoc-plugin-markdown"],
-    "out": "docs/markdown",
+    "out": "docs/html",
     "tsconfig": "tsconfig.json",
     "name": "Xandeum Web3 Library",
     "readme": "README.md",
