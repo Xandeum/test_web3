@@ -1,8 +1,8 @@
-[**Xandeum Web3 Library v1.9.0**](README.md)
+[**Xandeum Web3 Library v1.12.0**](README.md)
 
 ***
 
-# Xandeum Web3 Library v1.9.0
+# Xandeum Web3 Library v1.12.0
 
 ## Functions
 
@@ -13,6 +13,7 @@
 - [createFile](functions/createFile.md)
 - [exists](functions/exists.md)
 - [getMetadata](functions/getMetadata.md)
+- [getXandeumResult](functions/getXandeumResult.md)
 - [listDirectoryEntry](functions/listDirectoryEntry.md)
 - [move](functions/move.md)
 - [peek](functions/peek.md)

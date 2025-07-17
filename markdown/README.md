@@ -1,4 +1,4 @@
-**Xandeum Web3 Library v1.9.0**
+**Xandeum Web3 Library v1.12.0**
 
 ***
 
