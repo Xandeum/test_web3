@@ -2,13 +2,13 @@
 
 ***
 
-[Xandeum Web3 Library](../globals.md) / copyPath
+[Xandeum Web3 Library](../globals.md) / move
 
-# Function: copyPath()
+# Function: move()
 
-> **copyPath**(`fsid`, `srcPath`, `destPath`, `wallet`): `Promise`\<`Transaction`\>
+> **move**(`fsid`, `srcPath`, `destPath`, `name`, `wallet`): `Promise`\<`Transaction`\>
 
-Defined in: [copyPath.ts:18](https://github.com/Xandeum/test_web3/blob/main/src/copyPath.ts#L18)
+Defined in: [move.ts:19](https://github.com/Xandeum/test_web3/blob/main/src/move.ts#L19)
 
 Constructs a Solana transaction to copy a file or directory from one  path to another.
 
@@ -24,13 +24,19 @@ The unique numeric identifier representing the target file system.
 
 `string`
 
-The source path to copy from (e.g., `/documents/report.txt`).
+The source path to copy from (e.g., `/documents`).
 
 ### destPath
 
 `string`
 
-The destination path to copy to (e.g., `/archive/report.txt`).
+The destination path to copy to (e.g., `/archive`).
+
+### name
+
+`string`
+
+The name of the new file or directory at the destination (e.g., `report.txt`).
 
 ### wallet
 
